@@ -136,11 +136,13 @@ var AppViewModel = function () {
               school.snippet_text(snippet_text || '');
 
 
-              var infoContent = '<div id="infoWindow"><h4>' + school.name() + '</h4><div id="rating-img"><img src="' + school.rating_img_url +
+              var infoContent = '<div id="infoWindow"><h4>' + school.name() + '</h4><div id="rating-img"><img src="' + school.rating_img_url() +
                         '"></div> <div> <span class="glyphicon glyphicon-phone-alt">  ' + school.phone() +
                         '</span></div><div> <span class="glyphicon glyphicon-home">  </span>' + school.address() +
                         '</div><br/><p class="text-muted"><span class="glyphicon glyphicon-comment"></span>  ' +
-                        school.snippet_text() + '(<a target="_blank" href="' + school.yelp_url() + '">Read More</a>)</p></div>';
+                        school.snippet_text() + '(<a target="_blank" href="' + school.yelp_url() +
+                        '">Read More</a>)</p></div><div><span class="navbar-text">Powered   By</span>'+ '<a target="_blank" href="' + school.yelp_url() +
+                        '"><img src="https://s3-media3.fl.yelpcdn.com/assets/srv0/yelp_styleguide/21bc82aab542/assets/img/logos/logo_desktop_small.png"></a></div>';
 
               //Google maps event listener
               google.maps.event.addListener(school.marker, 'click', function () {
