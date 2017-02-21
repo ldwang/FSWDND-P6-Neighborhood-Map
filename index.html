@@ -4,21 +4,58 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
   <meta http-equiv="x-ua-compatible" content="ie=edge">
-  <title>Item Catelog</title>
-  <link rel="stylesheet" href="/css/bootstrap.min.css">
-  <link rel="stylesheet" href="/css/style.css">
-  <script type="application/javascript" src="/js/jquery-3.1.1.js"></script>
-  <script type="application/javascript" src="/js/tether.min.js"></script>
-  <script type="application/javascript" src="/js/bootstrap.min.js"></script>
+  <title>Neighborhood Map</title>
+  <link rel="stylesheet" href="css/bootstrap.css">
+  <link rel="stylesheet" href="css/style.css">
+  <script type="application/javascript" src="js/jquery-3.1.1.js"></script>
+  <script type="application/javascript" src="js/tether.min.js"></script>
+  <script type="application/javascript" src="js/bootstrap.min.js"></script>
 </head>
 <body>
 
-    {% block content %}
-    {% endblock %}
+  <!-- Navigation -->
+  <nav class="navbar navbar-inverse navbar-fixed-top">
+    <div class="container">
+      <div class="navbar-header">
+          <div class="navbar-text navbar-left">
+            <input type="Search" placeholder="Search..."  data-bind="textInput: searchString" />
+          </div>
+
+        <div class="navbar-brand navbar-right" > Top Bay Area Public High School Map</div>
+      </div>
+    </div>
+  </nav>
+
+  <!-- /.container -->
+  <div class="container">
+    <div class="col-md-3 ">
+      <p class="lead">Public School List</p>
+
+      <ul class="list-group" data-bind="foreach: filteredSchools">
+        <li class="list-group-item" data-bind="text: name, click: $parent.showInfoWindow"></li>
+      </ul>
+
+    </div>
+    <div class="col-md-9">
+      <div id="map" class="map"></div>
+
+
+
+
+    <!-- JS resources for Knockout and Google Maps -->
+      <script src="js/knockout-3.4.1.js"></script>
+      <script src="js/oauth-signature.min.js"></script>
+      <script src="js/data.js"></script>
+      <script src="js/app.js"></script>
+      <!-- Load Google Maps asynchronously credit https://discussions.udacity.com/t/handling-google-maps-in-async-and-fallback/34282 -->
+      <script async defer src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDdyVHA1n5dIdyzaEFdy0RvvGSORwXu9Lk&callback=initMap" onerror="googleError()"> </script>
+    </div>
+  </div>
+
     <!-- Footer -->
     <footer class="navbar-inverse navbar-fixed-bottom">
       <div class="container">
-          <p class="text-muted">Powered by Flask & Bootstrap</p>
+          <p class="text-muted">Powered by KnockoutJS & Bootstrap</p>
       </div>
     </footer>
 </body>

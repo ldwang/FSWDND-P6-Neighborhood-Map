@@ -1,1 +1,1 @@
-Santa Clara County High School Map
+Top 10 Bay Area Public High School Map
