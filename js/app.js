@@ -135,29 +135,39 @@ var AppViewModel = function () {
               var snippet_text = result.hasOwnProperty('snippet_text') ? result.snippet_text : '';
               school.snippet_text(snippet_text || '');
 
-              console.log(school.yelp_url());
-              infoContent = '<div id="infoWindow"><h4>' + school.name() + '</h4><div id="rating-img"><img src="' + school.rating_img_url +
+
+              var infoContent = '<div id="infoWindow"><h4>' + school.name() + '</h4><div id="rating-img"><img src="' + school.rating_img_url +
                         '"></div> <div> <span class="glyphicon glyphicon-phone-alt">  ' + school.phone() +
-                        '</span></div><div> <span class="glyphicon glyphicon-home">  ' + school.address() +
-                        '</span></div><br/><p class="text-muted"><span class="glyphicon glyphicon-comment"></span>  ' +
+                        '</span></div><div> <span class="glyphicon glyphicon-home">  </span>' + school.address() +
+                        '</div><br/><p class="text-muted"><span class="glyphicon glyphicon-comment"></span>  ' +
                         school.snippet_text() + '(<a target="_blank" href="' + school.yelp_url() + '">Read More</a>)</p></div>';
 
               //Google maps event listener
               google.maps.event.addListener(school.marker, 'click', function () {
-                    infoWindow.open(map, school.marker);
+                    infoWindow.setContent(infoContent);
+                    infoWindow.open(map, this);
                     school.marker.setAnimation(google.maps.Animation.BOUNCE);
                     setTimeout(function () {
                         school.marker.setAnimation(null);
                     }, 1400);
-                    infoWindow.setContent(infoContent);
+
               });
           },
           error: function(error) {
-              infoWindow.setContent('<h4>Yelp Request is unavailable. Please try again later.</h4>h5');
+              var infoWarning = '<h5 class="alert-warning">Yelp Request is unavailable. Please try again later.</h5>';
+
+              google.maps.event.addListener(school.marker, 'click', function () {
+
+                    infoWindow.setContent(infoWarning);
+                    infoWindow.open(map, this);
+                    school.marker.setAnimation(google.maps.Animation.BOUNCE);
+                    setTimeout(function () {
+                        school.marker.setAnimation(null);
+                    }, 1400);
+
+              });
           }
         });
-
-
 
     });
 
@@ -187,7 +197,6 @@ var AppViewModel = function () {
             });
         }
     })
-
 
 };
 
